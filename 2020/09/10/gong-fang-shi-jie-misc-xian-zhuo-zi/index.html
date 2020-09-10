@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-08-30
+                    2020-09-10
                 </div>
                 
 
@@ -452,7 +452,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    26
+                    87
                 </div>
                 
 
@@ -464,7 +464,40 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>title: 404<br>date: 2019-08-5 16:41:10<br>type: “404”<br>layout: “404”<br>description: “Oops～，我崩溃了！找不到你想要的页面 :(“</p>
+                <p>title: 攻防世界MISC-掀桌子<br><font color=#999AAA ><strong>攻防世界MISC-掀桌子</strong></p>
+</font>
+
+
+<p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
+
+<h1 id="题目展示"><a href="#题目展示" class="headerlink" title="题目展示"></a>题目展示</h1><p><font color=#999AAA ><img src="https://img-blog.csdnimg.cn/20200910201353383.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ljZXlVcA==,size_16,color_FFFFFF,t_70#pic_center"></p>
+<h1 id="一、解题思路"><a href="#一、解题思路" class="headerlink" title="一、解题思路"></a>一、解题思路</h1><p><font color=#999AAA >仔细观察题目所给报文，可以发现报文组成中的数字都为0-9，而字母都为a-f：<img src="https://img-blog.csdnimg.cn/2020091020240568.png#pic_center" alt="在这里插入图片描述"></p>
+<p><font color=#999AAA >于是考虑该报文可能是由16进制数组成。<br>而要想得到flag，需要设法将其转成字符串，即通过ascii码转成字符。<br>而ascii码是使用指定的7位或8位二进制数组合来表示128或256种可能的字符：<img src="https://img-blog.csdnimg.cn/20200910202325538.png#pic_center" alt="在这里插入图片描述"><br>所以将报文中的十六进制数以2个一组分割，转换成十进制数，再转换为ascii码即可得到flag</p>
+<h1 id="二、解题步骤"><a href="#二、解题步骤" class="headerlink" title="二、解题步骤"></a>二、解题步骤</h1><h2 id="1-转换成10进制"><a href="#1-转换成10进制" class="headerlink" title="1.转换成10进制"></a>1.转换成10进制</h2><p><font color=#999AAA >先打印出所有十进制数进行观察：</p>
+<pre class="line-numbers language-c"><code class="language-c">s <span class="token operator">=</span> <span class="token string">'c8e9aca0c6f2e5f3e8c4efe7a1a0d4e8e5a0e6ece1e7a0e9f3baa0e8eafae3f9e4eafae2eae4e3eaebfaebe3f5e7e9f3e4e3e8eaf9eaf3e2e4e6f2'</span>
+a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+<span class="token keyword">for</span> i in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> <span class="token string">'0x'</span> <span class="token operator">+</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> s<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span>
+    a<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><font color=#999AAA >发现结果均大于128，所以需要减去128才可转换：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token punctuation">[</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">233</span><span class="token punctuation">,</span> <span class="token number">172</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">198</span><span class="token punctuation">,</span> <span class="token number">242</span><span class="token punctuation">,</span> <span class="token number">229</span><span class="token punctuation">,</span> <span class="token number">243</span><span class="token punctuation">,</span> <span class="token number">232</span><span class="token punctuation">,</span> <span class="token number">196</span><span class="token punctuation">,</span> <span class="token number">239</span><span class="token punctuation">,</span> <span class="token number">231</span><span class="token punctuation">,</span> <span class="token number">161</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">212</span><span class="token punctuation">,</span> <span class="token number">232</span><span class="token punctuation">,</span> <span class="token number">229</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">230</span><span class="token punctuation">,</span> <span class="token number">236</span><span class="token punctuation">,</span> <span class="token number">225</span><span class="token punctuation">,</span> <span class="token number">231</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">233</span><span class="token punctuation">,</span> <span class="token number">243</span><span class="token punctuation">,</span> <span class="token number">186</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">232</span><span class="token punctuation">,</span> <span class="token number">234</span><span class="token punctuation">,</span> <span class="token number">250</span><span class="token punctuation">,</span> <span class="token number">227</span><span class="token punctuation">,</span> <span class="token number">249</span><span class="token punctuation">,</span> <span class="token number">228</span><span class="token punctuation">,</span> <span class="token number">234</span><span class="token punctuation">,</span> <span class="token number">250</span><span class="token punctuation">,</span> <span class="token number">226</span><span class="token punctuation">,</span> <span class="token number">234</span><span class="token punctuation">,</span> <span class="token number">228</span><span class="token punctuation">,</span> <span class="token number">227</span><span class="token punctuation">,</span> <span class="token number">234</span><span class="token punctuation">,</span> <span class="token number">235</span><span class="token punctuation">,</span> <span class="token number">250</span><span class="token punctuation">,</span> <span class="token number">235</span><span class="token punctuation">,</span> <span class="token number">227</span><span class="token punctuation">,</span> <span class="token number">245</span><span class="token punctuation">,</span> <span class="token number">231</span><span class="token punctuation">,</span> <span class="token number">233</span><span class="token punctuation">,</span> <span class="token number">243</span><span class="token punctuation">,</span> <span class="token number">228</span><span class="token punctuation">,</span> <span class="token number">227</span><span class="token punctuation">,</span> <span class="token number">232</span><span class="token punctuation">,</span> <span class="token number">234</span><span class="token punctuation">,</span> <span class="token number">249</span><span class="token punctuation">,</span> <span class="token number">234</span><span class="token punctuation">,</span> <span class="token number">243</span><span class="token punctuation">,</span> <span class="token number">226</span><span class="token punctuation">,</span> <span class="token number">228</span><span class="token punctuation">,</span> <span class="token number">230</span><span class="token punctuation">,</span> <span class="token number">242</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="2-获取flag"><a href="#2-获取flag" class="headerlink" title="2.获取flag"></a>2.获取flag</h2><p><font color=#999AAA >代码如下（示例）：</p>
+<pre class="line-numbers language-c"><code class="language-c">s <span class="token operator">=</span> <span class="token string">'c8e9aca0c6f2e5f3e8c4efe7a1a0d4e8e5a0e6ece1e7a0e9f3baa0e8eafae3f9e4eafae2eae4e3eaebfaebe3f5e7e9f3e4e3e8eaf9eaf3e2e4e6f2'</span>
+flag <span class="token operator">=</span> <span class="token string">''</span>
+
+<span class="token keyword">for</span> i in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> <span class="token string">'0x'</span> <span class="token operator">+</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> s<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span>
+    flag <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">chr</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">128</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><font color=#999AAA >flag：flag{hjzcydjzbjdcjkzkcugisdchjyjsbdfr}</p>
+<pre class="line-numbers language-c"><code class="language-c">Hi<span class="token punctuation">,</span> FreshDog<span class="token operator">!</span> The flag is<span class="token punctuation">:</span> hjzcydjzbjdcjkzkcugisdchjyjsbdfr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
+
+<h1 id="三、反思"><a href="#三、反思" class="headerlink" title="三、反思"></a>三、反思</h1><p><font color=#999AAA >这个题目主要考察对十六进制和ascii码的熟悉程度，而在解题过程中，对上述两者的了解的掌握程度还是不够，今后需要加强。<br>此外，还要提高自己的脚本编写速度。</p>
 
             </div>
             <hr/>
@@ -490,7 +523,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://little-icey.github.io/404.html">https://little-icey.github.io/404.html</a>
+                    <a href="https://little-icey.github.io/2020/09/10/gong-fang-shi-jie-misc-xian-zhuo-zi/">https://little-icey.github.io/2020/09/10/gong-fang-shi-jie-misc-xian-zhuo-zi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -572,7 +605,7 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/404.html">
+                <a href="/2020/09/10/gong-fang-shi-jie-misc-xian-zhuo-zi/">
                     <div class="card-image">
                         
                         
@@ -584,13 +617,19 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            title: 404date: 2019-08-5 16:41:10type: “404”layout: “404”description: “Oops～，我崩溃了！找不到你想要的页面 :(“
+                            title: 攻防世界MISC-掀桌子攻防世界MISC-掀桌子
 
+
+
+@TOC
+
+
+三、反思这个题目主要考察对十六进制和ascii码的熟悉程度，而在解题过程中，对上述两者的了解的掌握程度还是不够，今后需要加强。此外，还要提高自己的脚本编写速
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-10
                             </span>
                         <span class="publish-author">
                             
@@ -608,23 +647,22 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/404.html">
+                <a href="/2020/08/30/hello-world/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            title: 404date: 2019-08-5 16:41:10type: “404”layout: “404”description: “Oops～，我崩溃了！找不到你想要的页面 :(“
-
+                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
                         
                     </div>
                     <div class="publish-info">
@@ -639,7 +677,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
