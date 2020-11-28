@@ -465,7 +465,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    77
+                    392
                 </div>
                 
 
@@ -477,19 +477,20 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><font color=#696969 ><strong>攻防世界MISC-掀桌子</strong></p>
-</font>
+                <!-- <font color=#696969 >**攻防世界MISC-掀桌子**
+
+</font> -->
 
 
 <!-- @[TOC](文章目录) -->
 
 
-<hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
+<!-- <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1"> -->
 
-<h1 id="题目展示"><a href="#题目展示" class="headerlink" title="题目展示"></a>题目展示</h1><p><font color=#696969 ><img src="https://img-blog.csdnimg.cn/20200910201353383.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ljZXlVcA==,size_16,color_FFFFFF,t_70#pic_center"></p>
-<h1 id="一、解题思路"><a href="#一、解题思路" class="headerlink" title="一、解题思路"></a>一、解题思路</h1><p><font color=#696969 >仔细观察题目所给报文，可以发现报文组成中的数字都为0-9，而字母都为a-f：<img src="https://img-blog.csdnimg.cn/2020091020240568.png#pic_center" alt="报文"></p>
+<h2 id="题目展示"><a href="#题目展示" class="headerlink" title="题目展示"></a>题目展示</h2><p><font color=#696969 ><img src="https://img-blog.csdnimg.cn/20200910201353383.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ljZXlVcA==,size_16,color_FFFFFF,t_70#pic_center"></p>
+<h2 id="一、解题思路"><a href="#一、解题思路" class="headerlink" title="一、解题思路"></a>一、解题思路</h2><p><font color=#696969 >仔细观察题目所给报文，可以发现报文组成中的数字都为0-9，而字母都为a-f：<img src="https://img-blog.csdnimg.cn/2020091020240568.png#pic_center" alt="报文"></p>
 <p><font color=#696969 >于是考虑该报文可能是由16进制数组成。<br>而要想得到flag，需要设法将其转成字符串，即通过ascii码转成字符。<br>而ascii码是使用指定的7位或8位二进制数组合来表示128或256种可能的字符：<img src="https://img-blog.csdnimg.cn/20200910202325538.png#pic_center" alt="ASCII码的表达方式"><br>所以将报文中的十六进制数以2个一组分割，转换成十进制数，再转换为ascii码即可得到flag</p>
-<h1 id="二、解题步骤"><a href="#二、解题步骤" class="headerlink" title="二、解题步骤"></a>二、解题步骤</h1><h2 id="1-转换成10进制"><a href="#1-转换成10进制" class="headerlink" title="1.转换成10进制"></a>1.转换成10进制</h2><p><font color=#696969 >先打印出所有十进制数进行观察：</p>
+<h2 id="二、解题步骤"><a href="#二、解题步骤" class="headerlink" title="二、解题步骤"></a>二、解题步骤</h2><h3 id="1-转换成10进制"><a href="#1-转换成10进制" class="headerlink" title="1.转换成10进制"></a>1.转换成10进制</h3><p><font color=#696969 >先打印出所有十进制数进行观察：</p>
 <pre class="line-numbers language-Python"><code class="language-Python">s = 'c8e9aca0c6f2e5f3e8c4efe7a1a0d4e8e5a0e6ece1e7a0e9f3baa0e8eafae3f9e4eafae2eae4e3eaebfaebe3f5e7e9f3e4e3e8eaf9eaf3e2e4e6f2'
 a = []
 
@@ -500,7 +501,7 @@ print(a)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
 <p><font color=#696969 >发现结果均大于128，所以需要减去128才可转换：</p>
 <pre class="line-numbers language-Python"><code class="language-Python">[200, 233, 172, 160, 198, 242, 229, 243, 232, 196, 239, 231, 161, 160, 212, 232, 229, 160, 230, 236, 225, 231, 160, 233, 243, 186, 160, 232, 234, 250, 227, 249, 228, 234, 250, 226, 234, 228, 227, 234, 235, 250, 235, 227, 245, 231, 233, 243, 228, 227, 232, 234, 249, 234, 243, 226, 228, 230, 242]
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="2-获取flag"><a href="#2-获取flag" class="headerlink" title="2.获取flag"></a>2.获取flag</h2><p><font color=#696969 >代码如下（示例）：</p>
+<h3 id="2-获取flag"><a href="#2-获取flag" class="headerlink" title="2.获取flag"></a>2.获取flag</h3><p><font color=#696969 >代码如下（示例）：</p>
 <pre class="line-numbers language-Python"><code class="language-Python">s = 'c8e9aca0c6f2e5f3e8c4efe7a1a0d4e8e5a0e6ece1e7a0e9f3baa0e8eafae3f9e4eafae2eae4e3eaebfaebe3f5e7e9f3e4e3e8eaf9eaf3e2e4e6f2'
 flag = ''
 
@@ -510,9 +511,9 @@ for i in range(0, len(s), 2):
 print(flag)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><font color=#696969 >flag：flag{hjzcydjzbjdcjkzkcugisdchjyjsbdfr}</p>
 <pre class="line-numbers language-Python"><code class="language-Python">Hi, FreshDog! The flag is: hjzcydjzbjdcjkzkcugisdchjyjsbdfr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
+<!-- <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1"> -->
 
-<h1 id="三、反思"><a href="#三、反思" class="headerlink" title="三、反思"></a>三、反思</h1><p><font color=#696969 >这个题目主要考察对十六进制和ascii码的熟悉程度，而在解题过程中，对上述两者的了解的掌握程度还是不够，今后需要加强。<br>此外，还要提高自己的脚本编写速度。</p>
+<h2 id="三、反思"><a href="#三、反思" class="headerlink" title="三、反思"></a>三、反思</h2><p><font color=#696969 >这个题目主要考察对十六进制和ascii码的熟悉程度，而在解题过程中，对上述两者的了解的掌握程度还是不够，今后需要加强。<br>此外，还要提高自己的脚本编写速度。</p>
 
             </div>
             <hr/>
@@ -636,7 +637,7 @@ print(flag)<span aria-hidden="true" class="line-numbers-rows"><span></span><span
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            攻防世界MISC-掀桌子
+                            
 
 
 
@@ -644,9 +645,9 @@ print(flag)<span aria-hidden="true" class="line-numbers-rows"><span></span><span
 
 
 
-
-三、反思这个题目主要考察对十六进制和ascii码的熟悉程度，而在解题过程中，对上述两者的了解的掌握程度还是不够，今后需要加强。此外，还要提高自己的脚本编写速度。
-
+题目展示
+一、解题思路仔细观察题目所给报文，可以发现报文组成中的数字都为0-9，而字母都为a-f：
+于是考虑该报文可能是由16进制数组成。而要想得到flag，需要设法将其转成字符串，即通过ascii码转成字符。而ascii码
                         
                     </div>
                     <div class="publish-info">
@@ -772,7 +773,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
+            collapseDepth: Number('1'),
             headingSelector: 'h2, h3, h4'
         });
 
@@ -860,7 +861,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">150</span>&nbsp;字
+                class="white-color">465</span>&nbsp;字
             
             
             
